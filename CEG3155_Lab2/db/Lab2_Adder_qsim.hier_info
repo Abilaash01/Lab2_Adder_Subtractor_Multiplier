@@ -1,0 +1,313 @@
+|fourbitmultiplier
+i_A[0] => oneAndFourBitInitial:cell_1.i_x
+i_A[1] => oneAndFourBit:cell_2.i_x
+i_A[2] => oneAndFourBit:cell_4.i_x
+i_A[3] => oneAndFourBit:cell_6.i_x
+i_B[0] => oneAndFourBitInitial:cell_1.i_y[0]
+i_B[0] => oneAndFourBit:cell_2.i_y[0]
+i_B[0] => oneAndFourBit:cell_4.i_y[0]
+i_B[0] => oneAndFourBit:cell_6.i_y[0]
+i_B[1] => oneAndFourBitInitial:cell_1.i_y[1]
+i_B[1] => oneAndFourBit:cell_2.i_y[1]
+i_B[1] => oneAndFourBit:cell_4.i_y[1]
+i_B[1] => oneAndFourBit:cell_6.i_y[1]
+i_B[2] => oneAndFourBitInitial:cell_1.i_y[2]
+i_B[2] => oneAndFourBit:cell_2.i_y[2]
+i_B[2] => oneAndFourBit:cell_4.i_y[2]
+i_B[2] => oneAndFourBit:cell_6.i_y[2]
+i_B[3] => oneAndFourBitInitial:cell_1.i_y[3]
+i_B[3] => oneAndFourBit:cell_2.i_y[3]
+i_B[3] => oneAndFourBit:cell_4.i_y[3]
+i_B[3] => oneAndFourBit:cell_6.i_y[3]
+i_cin => ~NO_FANOUT~
+o_product[0] <= oneAndFourBitInitial:cell_1.o_carry
+o_product[1] <= fourBitFullAdder:cell_3.o_sum[0]
+o_product[2] <= fourBitFullAdder:cell_5.o_sum[0]
+o_product[3] <= fourBitFullAdder:cell_7.o_sum[0]
+o_product[4] <= fourBitFullAdder:cell_7.o_sum[1]
+o_product[5] <= fourBitFullAdder:cell_7.o_sum[2]
+o_product[6] <= fourBitFullAdder:cell_7.o_sum[3]
+o_product[7] <= fourBitFullAdder:cell_7.o_cout
+o_cout <= comb~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|oneAndFourBitInitial:cell_1
+i_x => o_out~0.IN0
+i_x => o_out~1.IN0
+i_x => o_out~2.IN0
+i_x => o_carry~0.IN0
+i_y[0] => o_carry~0.IN1
+i_y[1] => o_out~0.IN1
+i_y[2] => o_out~1.IN1
+i_y[3] => o_out~2.IN1
+o_out[0] <= o_out~0.DB_MAX_OUTPUT_PORT_TYPE
+o_out[1] <= o_out~1.DB_MAX_OUTPUT_PORT_TYPE
+o_out[2] <= o_out~2.DB_MAX_OUTPUT_PORT_TYPE
+o_out[3] <= <GND>
+o_carry <= o_carry~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|oneAndFourBit:cell_2
+i_x => o_out~0.IN0
+i_x => o_out~1.IN0
+i_x => o_out~2.IN0
+i_x => o_out~3.IN0
+i_y[0] => o_out~0.IN1
+i_y[1] => o_out~1.IN1
+i_y[2] => o_out~2.IN1
+i_y[3] => o_out~3.IN1
+o_out[0] <= o_out~0.DB_MAX_OUTPUT_PORT_TYPE
+o_out[1] <= o_out~1.DB_MAX_OUTPUT_PORT_TYPE
+o_out[2] <= o_out~2.DB_MAX_OUTPUT_PORT_TYPE
+o_out[3] <= o_out~3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_3
+i_x[0] => oneBitFullAdder:cell_1.i_x
+i_x[1] => oneBitFullAdder:cell_2.i_x
+i_x[2] => oneBitFullAdder:cell_3.i_x
+i_x[3] => oneBitFullAdder:cell_4.i_x
+i_y[0] => oneBitFullAdder:cell_1.i_y
+i_y[1] => oneBitFullAdder:cell_2.i_y
+i_y[2] => oneBitFullAdder:cell_3.i_y
+i_y[3] => oneBitFullAdder:cell_4.i_y
+i_cin => oneBitFullAdder:cell_1.i_cin
+o_sum[0] <= oneBitFullAdder:cell_1.o_sum
+o_sum[1] <= oneBitFullAdder:cell_2.o_sum
+o_sum[2] <= oneBitFullAdder:cell_3.o_sum
+o_sum[3] <= oneBitFullAdder:cell_4.o_sum
+o_cout <= oneBitFullAdder:cell_4.o_cout
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_3|oneBitFullAdder:cell_1
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_3|oneBitFullAdder:cell_2
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_3|oneBitFullAdder:cell_3
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_3|oneBitFullAdder:cell_4
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|oneAndFourBit:cell_4
+i_x => o_out~0.IN0
+i_x => o_out~1.IN0
+i_x => o_out~2.IN0
+i_x => o_out~3.IN0
+i_y[0] => o_out~0.IN1
+i_y[1] => o_out~1.IN1
+i_y[2] => o_out~2.IN1
+i_y[3] => o_out~3.IN1
+o_out[0] <= o_out~0.DB_MAX_OUTPUT_PORT_TYPE
+o_out[1] <= o_out~1.DB_MAX_OUTPUT_PORT_TYPE
+o_out[2] <= o_out~2.DB_MAX_OUTPUT_PORT_TYPE
+o_out[3] <= o_out~3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_5
+i_x[0] => oneBitFullAdder:cell_1.i_x
+i_x[1] => oneBitFullAdder:cell_2.i_x
+i_x[2] => oneBitFullAdder:cell_3.i_x
+i_x[3] => oneBitFullAdder:cell_4.i_x
+i_y[0] => oneBitFullAdder:cell_1.i_y
+i_y[1] => oneBitFullAdder:cell_2.i_y
+i_y[2] => oneBitFullAdder:cell_3.i_y
+i_y[3] => oneBitFullAdder:cell_4.i_y
+i_cin => oneBitFullAdder:cell_1.i_cin
+o_sum[0] <= oneBitFullAdder:cell_1.o_sum
+o_sum[1] <= oneBitFullAdder:cell_2.o_sum
+o_sum[2] <= oneBitFullAdder:cell_3.o_sum
+o_sum[3] <= oneBitFullAdder:cell_4.o_sum
+o_cout <= oneBitFullAdder:cell_4.o_cout
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_5|oneBitFullAdder:cell_1
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_5|oneBitFullAdder:cell_2
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_5|oneBitFullAdder:cell_3
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_5|oneBitFullAdder:cell_4
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|oneAndFourBit:cell_6
+i_x => o_out~0.IN0
+i_x => o_out~1.IN0
+i_x => o_out~2.IN0
+i_x => o_out~3.IN0
+i_y[0] => o_out~0.IN1
+i_y[1] => o_out~1.IN1
+i_y[2] => o_out~2.IN1
+i_y[3] => o_out~3.IN1
+o_out[0] <= o_out~0.DB_MAX_OUTPUT_PORT_TYPE
+o_out[1] <= o_out~1.DB_MAX_OUTPUT_PORT_TYPE
+o_out[2] <= o_out~2.DB_MAX_OUTPUT_PORT_TYPE
+o_out[3] <= o_out~3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_7
+i_x[0] => oneBitFullAdder:cell_1.i_x
+i_x[1] => oneBitFullAdder:cell_2.i_x
+i_x[2] => oneBitFullAdder:cell_3.i_x
+i_x[3] => oneBitFullAdder:cell_4.i_x
+i_y[0] => oneBitFullAdder:cell_1.i_y
+i_y[1] => oneBitFullAdder:cell_2.i_y
+i_y[2] => oneBitFullAdder:cell_3.i_y
+i_y[3] => oneBitFullAdder:cell_4.i_y
+i_cin => oneBitFullAdder:cell_1.i_cin
+o_sum[0] <= oneBitFullAdder:cell_1.o_sum
+o_sum[1] <= oneBitFullAdder:cell_2.o_sum
+o_sum[2] <= oneBitFullAdder:cell_3.o_sum
+o_sum[3] <= oneBitFullAdder:cell_4.o_sum
+o_cout <= oneBitFullAdder:cell_4.o_cout
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_7|oneBitFullAdder:cell_1
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_7|oneBitFullAdder:cell_2
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_7|oneBitFullAdder:cell_3
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourbitmultiplier|fourBitFullAdder:cell_7|oneBitFullAdder:cell_4
+i_x => o_sum~0.IN0
+i_x => o_cout~0.IN0
+i_x => o_cout~1.IN0
+i_y => o_sum~0.IN1
+i_y => o_cout~0.IN1
+i_y => o_cout~3.IN0
+i_cin => o_sum~1.IN1
+i_cin => o_cout~1.IN1
+i_cin => o_cout~3.IN1
+o_sum <= o_sum~1.DB_MAX_OUTPUT_PORT_TYPE
+o_cout <= o_cout~4.DB_MAX_OUTPUT_PORT_TYPE
+
+

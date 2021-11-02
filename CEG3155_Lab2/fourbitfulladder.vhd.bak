@@ -1,0 +1,38 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity fourBitFullAdder is
+	port (
+      x: in std_logic_vector(3 downto 0);
+      y: in std_logic_vector(3 downto 0);
+      cin: in std_logic;
+      sum: out std_logic_vector(3 downto 0);
+      cout: out std_logic
+    );
+  end fourBitFullAdder;
+
+  architecture rtl of fourBitFullAdder is
+    component oneBitFullAdder
+      port (
+        x: in std_logic;
+        y: in std_logic;
+        cin: in std_logic;
+        sum: out std_logic;
+        cout: out std_logic
+      );
+    end component;
+
+    signal i_carry: std_logic_vector(2 downto 0);
+  begin
+    cell_1: add_1_bit
+      port map (x(0), y(0), cin, sum(0), i_carry(0));
+
+    cell_2: add_1_bit
+      port map (x(1), y(1), i_carry(0), sum(1), i_carry(1));
+
+    cell_3: add_1_bit
+      port map (x(2), y(2), i_carry(1), sum(2), i_carry(2));
+
+    cell_4: add_1_bit
+      port map (x(3), y(3), i_carry(2), sum(3), cout);
+  end rtl;
